@@ -18,8 +18,14 @@ export function Home() {
   }
 
   function handleToggleTaskDone(id: number) {
-    setTasks((state) => state.filter((state) => state.id !== id));
-    console.log(tasks);
+    const updatedTasks = tasks.map((task) => ({ ...task }));
+    const foundItem = updatedTasks.find((item) => item.id === id);
+
+    if (!foundItem) {
+      return;
+    }
+    foundItem.done = !foundItem.done;
+    setTasks(updatedTasks);
   }
 
   function handleRemoveTask(id: number) {
