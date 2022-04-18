@@ -45,17 +45,23 @@ export function TasksList({
                 testID={`button-${index}`}
                 activeOpacity={0.7}
                 style={styles.taskButton}
-                //TODO - use onPress (toggle task) prop
+                onPress={() => toggleTaskDone(item.id)}
               >
                 <View
                   testID={`marker-${index}`}
-                  //TODO - use style prop
+                  style={
+                    item.done === false
+                      ? styles.taskMarker
+                      : styles.taskMarkerDone
+                  }
                 >
                   {item.done && <Icon name="check" size={12} color="#FFF" />}
                 </View>
 
                 <Text
-                //TODO - use style prop
+                  style={
+                    item.done === false ? styles.taskText : styles.taskTextDone
+                  }
                 >
                   {item.title}
                 </Text>
@@ -65,7 +71,7 @@ export function TasksList({
             <TouchableOpacity
               testID={`trash-${index}`}
               style={{ paddingHorizontal: 24 }}
-              //TODO - use onPress (remove task) prop
+              onPress={() => removeTask(item.id)}
             >
               <Image source={trashIcon} />
             </TouchableOpacity>
